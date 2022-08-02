@@ -8,12 +8,18 @@
   },
   "scripts": {
     "start": "npx nodemon judgmentSimple.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "npm install --production"
+  },
+  "engines": {
+    "node": "16.14.0",
+    "npm": "8.3.1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "connect-loki": "^1.2.0",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.3",

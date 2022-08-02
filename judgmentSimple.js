@@ -1,3 +1,4 @@
+const config = require("./lib/config.js");
 const express = require('express');
 const morgan = require('morgan');
 const flash = require('express-flash');
@@ -10,8 +11,8 @@ const validate = require('./lib/validate');
 const Game = require('./lib/gameSimple');
 
 const app = express();
-const port = 3000;
-const host = "localhost";
+const port = config.PORT;
+const host = config.HOST;
 
 app.set("views", "./views");
 app.set("view engine", "pug");
@@ -29,7 +30,7 @@ app.use(session({
   name: "pj-dim-wist-session-id",
   resave: false,
   saveUninitialized: true,
-  secret: "this is not secure",
+  secret: config.SECRET,
   store: new LokiStore({}),
 }));
 
@@ -49,7 +50,6 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   res.locals.flash = req.session.flash;
   res.locals.game = req.session.game;
-  res.locals.hasBet = req.session.hasBet;
   delete req.session.flash;
   next();
 });
@@ -121,7 +121,7 @@ app.get("/bets", (req, res) => {
   console.log(res.locals);
   console.log(game.board[game.currentHand]);
   console.log("Inside of get game")
-  if (game.board[game.currentHand][0] !== {}) {
+  if (game.roundHasBet) {
     req.flash("error", "bets were already entered for this round");
     res.render("playRound", {
       flash: req.flash(),
