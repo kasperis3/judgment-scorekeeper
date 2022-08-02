@@ -64,20 +64,16 @@ app.get("/", (req, res) => {
 app.post("/bets/",  
   (req, res, next) => {
     let errors = validate.validate(req);
-    console.log(errors);
-    if (!errors.every(error => error === true)) {
-      console.log("let sg etot in)");
-      errors.forEach(message => {
-        if (message.msg) {
-          req.flash("error", message.msg);
-          console.log("in herte once");
+    if (errors.some(error => error === true)) {
+      for (let error of errors) {
+        if (error.msg) {
+          req.flash("error", error.msg);
+          break;
         }
-      });
-      console.log("hellopoooooooo");
+      }
       res.render("enterBets", {
         flash: req.flash(),
         invalidBet: true,
-        // game: req.session.game, 
         bets: req.body,
       });
     } else {
