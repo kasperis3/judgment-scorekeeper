@@ -1,0 +1,25 @@
+{
+  "name": "dim-wist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "judgment.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "start": "npx nodemon judgmentSimple.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "connect-loki": "^1.2.0",
+    "express": "^4.18.1",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.3",
+    "express-validator": "^6.14.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.19",
+    "pug": "^3.0.2"
+  }
+}

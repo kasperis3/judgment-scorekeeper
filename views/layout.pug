@@ -1,0 +1,33 @@
+doctype html
+
+html(lang="en-US")
+  head
+    title Diminishing Wist Score Keeper
+    meta(charset="utf-8")
+    link(rel="stylesheet" href="/stylesheets/application.css")
+    link(rel="stylesheet" href="/stylesheets/whitespace-reset.css")
+    link(rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans")
+    script(src="/javascripts/application.js")
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    script.
+      $(document).ready(function(){
+      $.ajax({url: "demo_test.txt", success: function(result){
+      $("#div1").html(result);
+      }});
+      });
+
+  body
+    header 
+      h1 Diminishing Wist Score Keeper
+      block headerLinks
+
+    main
+      - let kinds = Object.keys(flash || {})
+      if kinds.length > 0
+        ul
+          each kind in kinds
+            each message in flash[kind]
+              li.flash(class=kind)= message
+
+      block main
+

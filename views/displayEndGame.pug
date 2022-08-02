@@ -1,0 +1,16 @@
+extends layout 
+
+block main
+  - let winner = game.winnerWinner
+  header
+    h1 #{winner} is the winner!!
+
+  - let ranking = game.findRanking();
+
+  each player in ranking
+    player #{player} scores total #{game.board.masterScores[player]}
+    br
+
+  footer
+    a(href="/") PLAY ANOTHER GAME
+          

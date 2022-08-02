@@ -1,0 +1,23 @@
+extends layout
+
+block main
+  section
+    form(action=`/new` method="post")
+      dt
+        dl
+          label(for="numPlayers") How many players? (up to 10)
+        dd
+          input(type="text"
+          		name="numPlayers"
+          		placeholder="6"
+          		value=numPlayers)
+        dl
+          label(for="startFrom") How many hands to start from?
+        dd
+          input(type="text"
+          	 	name="startFrom"
+          	 	placeholder="13, 10, etc..."
+          	 	value=startFrom)
+
+      fieldset.actions
+        input(type="submit" value="Begin Game!")

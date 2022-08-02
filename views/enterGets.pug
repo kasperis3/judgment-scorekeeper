@@ -1,0 +1,23 @@
+extends layout
+
+block main
+  header
+    h1= game.currentHand
+  section
+    form(action="/gets/" method="post")
+      dt
+        - let ordering = game.createOrdering()
+        each player, i in ordering
+          dl
+            label(for=`${player}`) Player #{player} enter get
+          dd(class=(invalidGet && i === (ordering.length - 1))?"invalidGet":"")
+            input(type="text"
+              name=`${player}`
+              placeholder="6"
+              value=gets?gets[player]:"")
+    
+    
+
+
+      fieldset.actions
+        input(type="submit" value="Enter gets")

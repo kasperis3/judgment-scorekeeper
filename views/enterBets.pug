@@ -1,0 +1,23 @@
+extends layout
+
+block main
+
+  form(action="/bets/" method="post")
+    dt
+      h1= game.currentHand
+      - let ordering = game.createOrdering()
+      header(class="enteringBets") #{ordering[0]} goes first! Add who goes last function here. 
+      each player, i in ordering
+        dl
+          label(for=`${player}`) Player #{player} enter bet
+        dd(class=(invalidBet && i === (ordering.length - 1))?"invalidBet":"")
+          input(type="text"
+            name=`${player}`
+            placeholder="6"
+            value=bets?bets[player]:"")
+  
+  
+
+
+    fieldset.actions
+      input(type="submit" value="Enter bets")

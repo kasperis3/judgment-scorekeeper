@@ -1,0 +1,18 @@
+extends layout
+
+block main
+  header
+    h1 Results from this round
+    br
+    each player,i in game.createOrdering(1)
+      h4 Player #{player} 
+      p bet #{bets[player]} and got #{gets[player]}
+
+      p Round Score of #{scores[player]}
+      
+      p total score is #{game.board.masterScores[player]}
+      h2(class="spacebar") 
+
+  form(action="/bets" method="get")
+    fieldset.actions
+      input(type="submit" value="Play next round!")

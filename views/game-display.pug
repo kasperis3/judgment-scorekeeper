@@ -1,0 +1,18 @@
+extends layout
+
+block main
+  section#players 
+    header
+      ul
+      each player in game.playerNames
+        li #{player}
+
+
+  section#rows
+    - let keys = Object.keys(game.board)
+      each key in keys
+        ul #{key}
+          each array in game.board[key]
+            li(class=Array.isArray(array[0]) ? "betsAndGets" : "scores")
+              h3 #{array.join("   ")} this array
+        
