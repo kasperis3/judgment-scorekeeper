@@ -4,9 +4,9 @@ block main
 
   form(action="/bets/" method="post")
     dt
-      h1= game.currentHand
       - let ordering = game.createOrdering()
-      header(class="enteringBets") #{ordering[0]} goes first! Add who goes last function here. 
+      h1= game.currentHand
+      h1(class="enteringBets") #{ordering[0]} goes first! #{ordering[ordering.length-1]} goes last! 
       each player, i in ordering
         dl
           label(for=`${player}`) Player #{player} enter bet

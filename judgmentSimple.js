@@ -64,7 +64,7 @@ app.get("/", (req, res) => {
 app.post("/bets/",  
   (req, res, next) => {
     let errors = validate.validate(req);
-    if (errors.some(error => error === true)) {
+    if (!errors.every(error => error === true)) {
       for (let error of errors) {
         if (error.msg) {
           req.flash("error", error.msg);
@@ -83,7 +83,6 @@ app.post("/bets/",
       console.log(betsToValidate);
       let game = req.session.game;
       if (!game.validateBets(betsToValidate)) {
-        console.log("ENTER HERE");
         req.flash("error","The last player must bet correctly!");
         res.render("enterBets", {
           flash: req.flash(),
