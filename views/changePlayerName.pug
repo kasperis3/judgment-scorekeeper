@@ -1,0 +1,21 @@
+extends layout
+
+block main
+  form(action="/changeName" method="post")
+    dt
+      - let ordering = game.createOrdering()
+      h1= game.currentHand
+      each player, i in ordering
+        dl
+          label(for=`${player}`) Player #{game.yieldName(player)} enter name
+        dd
+          input(type=text
+          		name=`${player}`
+          		placeholder="Fuzzy"
+          		value=names?names[player]:"")
+
+    fieldset.actions
+      input(type="submit" value="Rename players")
+
+
+  

@@ -5,7 +5,7 @@ block main
     h1 Results from this round
     br
     each player,i in game.createOrdering(1)
-      h4 Player #{player} 
+      h4 Player #{game.yieldName(player)} 
       p bet #{bets[player]} and got #{gets[player]}
 
       p Round Score of #{scores[player]}

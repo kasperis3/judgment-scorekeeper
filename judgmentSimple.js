@@ -213,6 +213,22 @@ app.post("/new",
     next();
 });
 
+app.get("/changePlayerName", (req, res, next) => {
+  res.render("changePlayerName", {
+    names: req.session.game.names,
+  });
+})
+
+app.post("/changeName", (req, res, next) => {
+  let names = {...req.body};
+  let game = req.session.game;
+  game.names = names;
+  console.log(names);
+
+  res.redirect("/bets");
+
+});
+
 // Error handler
 app.use((err, req, res, next) => {
   console.log(err);

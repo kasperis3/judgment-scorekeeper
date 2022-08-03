@@ -3,13 +3,12 @@ extends layout
 block main
   - let winner = game.winnerWinner
   header
-    h1 #{winner} is the winner!!
+    h1 #{game.yieldName(winner)} is the winner!!
 
   - let ranking = game.findRanking();
 
   each player in ranking
-    player #{player} scores total #{game.board.masterScores[player]}
-    br
+    p player #{game.yieldName(player[0])} scores total #{player[1]}
 
   footer
     a(href="/") PLAY ANOTHER GAME

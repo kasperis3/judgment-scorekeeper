@@ -7,10 +7,10 @@ block main
       - let ordering = game.createOrdering()
       - let lastIndex = ordering.length - 1;
       h1= game.currentHand
-      h1(class="enteringBets") #{ordering[0]} goes first! #{ordering[lastIndex]} goes last! 
+      h1(class="enteringBets") #{game.yieldName(ordering[0])} goes first! #{game.yieldName(ordering[lastIndex])} goes last! 
       each player, i in ordering
         dl
-          label(for=`${player}`) Player #{player} enter bet
+          label(for=`${player}`) Player #{game.yieldName(player)} enter bet
         dd(class=(invalidBet && i === lastIndex)?"invalidBet":"")
           input(type="text"
             name=`${player}`
@@ -18,7 +18,7 @@ block main
             value=bets?bets[player]:"")
   
   
-
-
     fieldset.actions
       input(type="submit" value="Enter bets")
+
+  a(href="/changePlayerName") change player names
