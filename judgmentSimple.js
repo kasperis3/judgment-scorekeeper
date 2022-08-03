@@ -50,14 +50,23 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   res.locals.flash = req.session.flash;
   res.locals.game = req.session.game;
+  res.locals.hasBet = req.session.hasBet;
   delete req.session.flash;
   next();
 });
 
 app.get("/", (req, res) => {
   // if current game not in session
-  res.render("new-game");
-  // else display it at current round --> with option to cancel/start over 
+  // if (!("game" in req.session)) {
+    res.render("new-game");
+  // } else {
+    // if bets entered, playRound
+    // if (true) {
+      // res.render("playRound");
+    // } else {
+      // res.render("enterBets");
+    // }
+  // }
   
 });
 
@@ -86,14 +95,12 @@ app.post("/bets/",
         req.flash("error","The last player must bet correctly!");
         res.render("enterBets", {
           flash: req.flash(),
-          // game, 
           invalidBet: true,
           bets,
         });
       } else {
         game.enterBets(bets);
         res.render("playRound", {
-          // game,
         });
       }
     }
@@ -112,10 +119,6 @@ app.get("/gets", (req, res) => {
 
 app.get("/bets", (req, res) => {
   let game = req.session.game;
-  console.log(game);
-  console.log(res.locals);
-  console.log(game.board[game.currentHand]);
-  console.log("Inside of get game")
   if (game.roundHasBet) {
     req.flash("error", "bets were already entered for this round");
     res.render("playRound", {
@@ -125,7 +128,6 @@ app.get("/bets", (req, res) => {
   req.flash("success", "Let the rounds begin!");
   res.render("enterBets", {
     flash: Object.assign(req.flash(), res.locals.flash),
-    // game, 
   });
 });
 
@@ -139,7 +141,6 @@ app.post("/gets", (req, res, next) => {
     req.flash("error", "Somebody did not report the right get. Correct and click to continue!");
     res.render("enterGets", {
       flash: req.flash(),
-      // game,
       gets,
       invalidGet: true,
     });
@@ -148,21 +149,18 @@ app.post("/gets", (req, res, next) => {
     req.flash("error", "How did you get here? Bets were not entered correctly");
     res.render("enterBets", {
       flash: req.flash(),
-      // game,
       bets,
       invalidBet: true,
     });
   } else {
     // check that page was not refreshed
-
     console.log(game);
     console.log(`${game.winnerWinner} is the winner`);
     game.playHand(gets);
     if (game.isOver()) {
       req.flash("success", "The game is over!");
       res.render("displayEndGame", {
-        req: req.flash(),
-        // game, // TODO make displayEndGame call displayWinner()
+        req: req.flash(), // TODO make displayEndGame call displayWinner()
       });
     } else {
       let bets = game.board[game.previousHand][0];
@@ -172,7 +170,6 @@ app.post("/gets", (req, res, next) => {
         bets,
         gets, 
         scores,
-        // game,
       });
     }
     
@@ -202,7 +199,6 @@ app.post("/new",
   (req, res, next) => {
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log("end up in here?")
       errors.array().forEach(message => req.flash("error", message.msg));
       res.render("new-game", {
         flash: req.flash(),
