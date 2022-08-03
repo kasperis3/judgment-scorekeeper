@@ -5,12 +5,13 @@ block main
   form(action="/bets/" method="post")
     dt
       - let ordering = game.createOrdering()
+      - let lastIndex = ordering.length - 1;
       h1= game.currentHand
-      h1(class="enteringBets") #{ordering[0]} goes first! #{ordering[ordering.length-1]} goes last! 
+      h1(class="enteringBets") #{ordering[0]} goes first! #{ordering[lastIndex]} goes last! 
       each player, i in ordering
         dl
           label(for=`${player}`) Player #{player} enter bet
-        dd(class=(invalidBet && i === (ordering.length - 1))?"invalidBet":"")
+        dd(class=(invalidBet && i === lastIndex)?"invalidBet":"")
           input(type="text"
             name=`${player}`
             placeholder="6"
