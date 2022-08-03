@@ -14,6 +14,10 @@ form {
   text-align: center;
 }
 
+a {
+  display: block;
+}
+
 form, dt, dl {
   padding: 0 0 25px;
   width: 250px;
@@ -32,6 +36,25 @@ form dd, form dl {
   padding: 0 0 15px;
   width: 250px;
   height: auto;
+}
+
+div.headerRow {
+  background-color: cyan;
+  width: 100% auto;
+  border: 2.5px solid;
+  border-color: green;
+  margin-right: 10%;
+  display: inline-block;
+}
+
+div.roundRow {
+  display: block;
+}
+
+div > p {
+  display: inline-block;
+  margin: 0 20px;
+  width: auto;
 }
 
 dd.invalidBet {

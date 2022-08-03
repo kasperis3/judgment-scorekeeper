@@ -1,0 +1,26 @@
+extends layout
+
+block main
+  header
+    h1 Scores for All players
+  
+  section
+    - let rounds = game.yieldPlayedRounds()
+
+    div(class="headerRow") Hand
+      each player in game.createOrdering()
+        p #{game.yieldName(player)}
+
+    div(class="scoreRows") 
+      each round in rounds
+        div(class="roundRow")
+          p #{round}
+          each player in game.createOrdering()
+            - let data = game.yieldDataForPlayer(round, player)
+            p #{data[0]} #{data[1]} #{data[2]}
+          
+          
+
+  form(action="/bets" method="get")
+    fieldset.actions
+      input(type="submit" value="Play round!")

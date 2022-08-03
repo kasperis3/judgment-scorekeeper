@@ -217,13 +217,17 @@ app.get("/changePlayerName", (req, res, next) => {
   res.render("changePlayerName", {
     names: req.session.game.names,
   });
-})
+});
+
+app.get("/displayScores", (req, res, next) => {
+  console.log(req.session.game);
+  res.render("displayScores");
+});
 
 app.post("/changeName", (req, res, next) => {
   let names = {...req.body};
   let game = req.session.game;
   game.names = names;
-  console.log(names);
 
   res.redirect("/bets");
 

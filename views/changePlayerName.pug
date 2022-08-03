@@ -11,7 +11,7 @@ block main
         dd
           input(type=text
           		name=`${player}`
-          		placeholder="Fuzzy"
+          		placeholder=names[player]?names[player]:"Fuzzy"
           		value=names?names[player]:"")
 
     fieldset.actions
