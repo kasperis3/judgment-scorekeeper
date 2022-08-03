@@ -38,23 +38,26 @@ form dd, form dl {
   height: auto;
 }
 
-div.headerRow {
-  background-color: cyan;
-  width: 100% auto;
-  border: 2.5px solid;
-  border-color: green;
-  margin-right: 10%;
-  display: inline-block;
-}
-
-div.roundRow {
+section > div {
   display: block;
 }
 
-div > p {
-  display: inline-block;
-  margin: 0 20px;
+section.hands {
+  float: left;
+  width: 10%;
+}
+
+section.scores {
   width: auto;
+}
+
+div.playerColumn {
+  display: inline-block;
+  border-color: cyan;
+  background-color: cyan;
+  border: 2.5px solid;
+  margin-right: 10%;
+  padding: 3px;
 }
 
 dd.invalidBet {

@@ -219,6 +219,11 @@ app.get("/changePlayerName", (req, res, next) => {
   });
 });
 
+// app.get("/displayScores", (req, res, next) => {
+//   console.log(req.session.game);
+//   res.render("displayScores");
+// });
+
 app.get("/displayScores", (req, res, next) => {
   console.log(req.session.game);
   res.render("displayScores");
