@@ -1,4 +1,4 @@
-# judgmentscorekeeper
+# Judgment Scorekeeper
 
 Keep track of the scores for all your Dimishing Wist games!
 
